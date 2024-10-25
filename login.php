@@ -2,6 +2,12 @@
 // start the session
 session_start();
 
+// early redirect if the user is already logged in
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+    die;
+}
+
 include './layout/header.php';
 
 // Connect to the DB
@@ -17,9 +23,9 @@ $logged = false;
 $errors = [];
 
 // Get the form parameters if form have been submitted
-if (isset($_GET['username']) && isset($_GET['password'])) {
-    $username = $_GET['username'];
-    $password = $_GET['password'];
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
     //Prepare the query
     $stmt = $conn->prepare("SELECT * FROM `users` WHERE `username` = ? ");
@@ -37,6 +43,9 @@ if (isset($_GET['username']) && isset($_GET['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $logged = true;
+
+            header('Location: dashboard.php');
+            die;
         } else {
             $errors['password'] = "Invalid password";
         }
@@ -57,7 +66,12 @@ $conn->close();
 
 <div class="container mx-auto">
 
-    <form class="col-6 mx-auto" method="get">
+    <?php if (isset($_GET['message'])) : ?>
+        <h3><?= $_GET['message'] ?></h3>
+    <?php endif; ?>
+
+
+    <form class="col-6 mx-auto" method="post">
         <?php if ($logged): ?>
             <p class="text-success">Sei correttamente loggato</p>
         <?php endif; ?>

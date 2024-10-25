@@ -1,3 +1,8 @@
+<?php
+$logged = false;
+if (isset($_SESSION['user_id'])) $logged = true;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +22,19 @@
             <div class="title">
                 <a href="index.php" class="fs-2 text-decoration-none">My Blog</a>
             </div>
-            <a href="login.php" class="btn btn-primary">Login</a>
+
+            <div class="d-flex gap-3">
+                <?php if ($logged) : ?>
+                    <a href="dashboard.php" class="btn btn-primary">Dashboard</a>
+                    <form method="post" action="logout.php">
+                        <button class="btn btn-outline-primary" type="submit">Logout</button>
+                    </form>
+
+
+                <?php else : ?>
+                    <a href="login.php" class="btn btn-primary">Login</a>
+                <?php endif; ?>
+            </div>
         </div>
     </header>
 </body>
