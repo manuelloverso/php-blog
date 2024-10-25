@@ -23,10 +23,10 @@ if (isset($_SESSION['user_id'])) $logged = true;
                 <a href="/PHP/php-blog/index.php" class="fs-2 text-decoration-none">My Blog</a>
             </div>
 
-            <div class="d-flex gap-3">
+            <div class="d-flex gap-3 align-items-center">
                 <?php if ($logged) : ?>
                     <a href="/PHP/php-blog/views/dashboard.php" class="btn btn-primary">Dashboard</a>
-                    <form method="post" action="/PHP/php-blog/controllers/logout-controller.php">
+                    <form class="m-0" method="post" action="/PHP/php-blog/controllers/logout-controller.php">
                         <button class="btn btn-outline-primary" type="submit">Logout</button>
                     </form>
 
