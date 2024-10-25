@@ -15,9 +15,9 @@
     <header class="py-4">
         <div class="container d-flex align-items-center justify-content-between">
             <div class="title">
-                <span class="fs-2">My Blog</span>
+                <a href="index.php" class="fs-2 text-decoration-none">My Blog</a>
             </div>
-            <button class="btn btn-primary">Login</button>
+            <a href="login.php" class="btn btn-primary">Login</a>
         </div>
     </header>
 </body>
