@@ -20,19 +20,19 @@ if (isset($_SESSION['user_id'])) $logged = true;
     <header class="py-4">
         <div class="container d-flex align-items-center justify-content-between">
             <div class="title">
-                <a href="index.php" class="fs-2 text-decoration-none">My Blog</a>
+                <a href="/PHP/php-blog/index.php" class="fs-2 text-decoration-none">My Blog</a>
             </div>
 
             <div class="d-flex gap-3">
                 <?php if ($logged) : ?>
-                    <a href="dashboard.php" class="btn btn-primary">Dashboard</a>
-                    <form method="post" action="logout.php">
+                    <a href="/PHP/php-blog/views/dashboard.php" class="btn btn-primary">Dashboard</a>
+                    <form method="post" action="/PHP/php-blog/controllers/logout-controller.php">
                         <button class="btn btn-outline-primary" type="submit">Logout</button>
                     </form>
 
 
                 <?php else : ?>
-                    <a href="login.php" class="btn btn-primary">Login</a>
+                    <a href="/PHP/php-blog/views/login.php" class="btn btn-primary">Login</a>
                 <?php endif; ?>
             </div>
         </div>

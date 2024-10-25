@@ -7,4 +7,4 @@ session_unset();
 // destroy the session
 session_destroy();
 
-header('Location: index.php?message=You have successfully logged out.');
+header('Location: /PHP/php-blog/index.php?message=You have successfully logged out.');
