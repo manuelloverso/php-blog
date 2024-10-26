@@ -23,7 +23,6 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // Fetch all rows as an associative array
     $posts = $result->fetch_all(MYSQLI_ASSOC);
-    var_dump($posts);
 } else {
     echo "No posts found.";
 }
@@ -35,9 +34,29 @@ if ($result->num_rows > 0) {
 <div class="container">
     <h2>Hello <?= $_SESSION['username'] ?></h2>
 
+    <?php if (isset($_GET['message'])) : ?>
+        <p class="text-success"><?= $_GET['message'] ?></p>
+    <?php endif; ?>
 
+    <?php if (isset($_GET['error'])) : ?>
+        <p class="text-success"><?= $_GET['error'] ?></p>
+    <?php endif; ?>
+
+    <div class="actions d-flex justify-content-end gap-3 mb-4">
+        <a class="btn btn-success" href="./create-post.php">Add post</a>
+        <a class="btn btn-warning" href="./create-category.php">Add category</a>
+    </div>
+
+    <div class="posts">
+        <?php foreach ($posts as $post) : ?>
+            <div class="card p-3 mb-4">
+                <h3 class="text-center"><?= $post['title'] ?></h3>
+                <p><?= $post['content'] ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
 
 
 
-<?php include './layout/footer.php'; ?>
+<?php include '../layout/footer.php'; ?>
