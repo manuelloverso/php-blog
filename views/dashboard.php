@@ -17,12 +17,15 @@ if ($conn->connect_error) {
 }
 
 // Prepare the query to get the posts
-$sql = "SELECT * FROM `posts`";
+$sql = "SELECT title, content, categories.name AS category_name
+FROM posts
+LEFT JOIN categories ON categories.id = posts.category_id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // Fetch all rows as an associative array
     $posts = $result->fetch_all(MYSQLI_ASSOC);
+    var_dump($posts);
 } else {
     echo "No posts found.";
 }
@@ -52,6 +55,8 @@ if ($result->num_rows > 0) {
             <div class="card p-3 mb-4">
                 <h3 class="text-center"><?= $post['title'] ?></h3>
                 <p><?= $post['content'] ?></p>
+                <p class="fs-3"><?= $post['category_name'] ?? 'no category associated' ?></p>
+
             </div>
         <?php endforeach; ?>
     </div>

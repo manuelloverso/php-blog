@@ -25,9 +25,9 @@ function create_post()
         exit('Failed to connect to the DB ' . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO `posts` (title, content) VALUES (?,?)";
+    $sql = "INSERT INTO `posts` (title, content, category_id) VALUES (?,?,?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ss', $_POST['title'], $_POST['content']);
+    $stmt->bind_param('ssi', $_POST['title'], $_POST['content'], intval($_POST['category']));
 
     $result = $stmt->execute();
 
