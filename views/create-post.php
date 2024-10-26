@@ -45,3 +45,5 @@ if (!isset($_SESSION['user_id'])) {
 
     </form>
 </div>
+
+<?php include '../layout/footer.php'; ?>

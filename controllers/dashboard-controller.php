@@ -44,4 +44,32 @@ function create_post()
     $conn->close();
 }
 
-function create_category() {}
+function create_category()
+{
+    // Connect to the DB
+    $conn = new mysqli('localhost', 'root', 'root', 'php-blog');
+
+    // Check connection
+    if ($conn->connect_error) {
+        exit('Failed to connect to the DB ' . $conn->connect_error);
+    }
+
+
+    $sql = "INSERT INTO `categories` (name) VALUES (?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $_POST['name']);
+
+    $result = $stmt->execute();
+
+    if ($result) {
+        header('Location: ../views/dashboard.php?message=Category created successfully');
+    } else {
+        header('Location: ../views/create-post.php?error=Category wasnt created');
+    }
+
+    var_dump($result);
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+}
